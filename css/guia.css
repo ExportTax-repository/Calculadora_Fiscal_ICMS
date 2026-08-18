@@ -1,0 +1,268 @@
+/* ============================================================
+   GUIA.CSS — Guia Rápido de Uso
+   Estilos específicos do guia_rapido.html
+   Depende de: style.css
+   ============================================================ */
+
+/* ── WRAPPER DO GUIA ───────────────────────────────────── */
+.guia-container {
+    max-width: 900px;
+    margin: 36px auto;
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(1, 33, 105, 0.04),
+                0 16px 48px rgba(1, 33, 105, 0.12);
+    overflow: hidden;
+    animation: fadeUp 0.35s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+/* ── HERO DO GUIA ──────────────────────────────────────── */
+.guia-hero {
+    background: linear-gradient(160deg, #001240 0%, #001A52 55%, #007DBA 100%);
+    padding: 48px 40px 40px;
+    position: relative;
+    overflow: hidden;
+}
+
+.guia-hero::after {
+    content: '';
+    position: absolute;
+    right: -40px;
+    bottom: -60px;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 125, 186, 0.2) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.guia-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+}
+
+.guia-eyebrow::before {
+    content: '';
+    display: block;
+    width: 18px;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.7;
+}
+
+.guia-hero h1 {
+    color: var(--white);
+    font-family: var(--font-serif);
+    font-size: 26px;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+}
+
+.guia-hero p {
+    color: rgba(255, 255, 255, 0.62);
+    font-size: 14px;
+    margin: 0;
+}
+
+/* ── CORPO DO GUIA ─────────────────────────────────────── */
+.guia-body {
+    padding: 40px;
+}
+
+@media (max-width: 768px) {
+    .guia-hero { padding: 36px 24px 32px; }
+    .guia-body  { padding: 24px; }
+}
+
+/* ── TÍTULO DE SEÇÃO ───────────────────────────────────── */
+.section-title {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    color: var(--navy);
+    margin: 36px 0 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--navy);
+}
+
+.section-title:first-child { margin-top: 0; }
+
+/* ── PASSOS ────────────────────────────────────────────── */
+.passos { display: grid; gap: 12px; }
+
+.passo {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    gap: 18px;
+    align-items: start;
+    background: var(--ivory);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 18px 20px;
+    transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.passo:hover {
+    box-shadow: 0 4px 16px rgba(1, 33, 105, 0.1);
+    transform: translateX(3px);
+}
+
+.passo-num {
+    width: 36px;
+    height: 36px;
+    background: var(--navy);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.passo h3 {
+    font-size: 14px;
+    color: var(--navy);
+    margin-bottom: 5px;
+}
+
+.passo p {
+    font-size: 13px;
+    color: var(--gray-500);
+    margin: 0;
+    line-height: 1.6;
+}
+
+.passo-obs {
+    font-weight: 400;
+    color: var(--gray-500);
+    font-style: italic;
+}
+
+/* ── BLOCOS DE FÓRMULA ─────────────────────────────────── */
+.formula {
+    background: #F5F7FF;
+    border: 1px solid rgba(1, 33, 105, 0.1);
+    border-left: 3px solid var(--navy);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    padding: 16px 20px;
+    margin: 12px 0;
+    font-size: 14px;
+    color: var(--navy);
+    font-family: var(--font-serif);
+    line-height: 1.8;
+}
+
+.formula.formula-gold {
+    border-left-color: var(--gold);
+}
+
+.formula-label {
+    font-family: var(--font-sans);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gray-500);
+    margin-bottom: 8px;
+    display: block;
+}
+
+/* ── GRID DE EXEMPLO ───────────────────────────────────── */
+.exemplo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 16px 0;
+}
+
+@media (max-width: 600px) { .exemplo-grid { grid-template-columns: 1fr; } }
+
+.exemplo-col {
+    background: var(--ivory);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+}
+
+.exemplo-col h4 {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray-300);
+    margin-bottom: 12px;
+}
+
+.ex-linha {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+}
+
+.ex-linha:last-child { border-bottom: none; }
+
+.ex-linha .el { color: var(--gray-500); }
+.ex-linha .ev { font-weight: 600; color: var(--gray-900); }
+
+/* ── TOTAL DESTAQUE ────────────────────────────────────── */
+.total-box {
+    background: var(--gold-pale);
+    border: 1.5px solid var(--gold);
+    border-radius: var(--radius-lg);
+    padding: 18px 24px;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.total-box .tl {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--warning-tx);
+    margin-bottom: 4px;
+}
+
+.total-box .tv {
+    font-family: var(--font-serif);
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--danger);
+    letter-spacing: -0.02em;
+}
+
+/* ── FAQ DO GUIA ───────────────────────────────────────── */
+.faq-item {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.faq-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+.faq-item h3 {
+    font-family: var(--font-serif);
+    font-size: 14px;
+    color: var(--navy);
+    margin-bottom: 6px;
+    transition: color var(--transition);
+}
+
+.faq-item:hover h3 { color: var(--sky); }
+
+.faq-item p {
+    font-size: 13px;
+    color: var(--gray-500);
+    line-height: 1.65;
+    margin: 0;
+}

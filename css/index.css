@@ -1,0 +1,561 @@
+/* ============================================================
+   INDEX.CSS — Calculadora de Notas de Débito
+   Estilos específicos da página principal
+   Depende de: style.css
+   ============================================================ */
+
+/* ── CONTAINER WRAPPER ─────────────────────────────────── */
+.container {
+    padding: 0;
+}
+
+.content-wrapper {
+    padding: 40px;
+}
+
+@media (max-width: 768px) {
+    .content-wrapper { padding: 20px; }
+}
+
+/* ── HERO ──────────────────────────────────────────────── */
+.page-hero {
+    background: linear-gradient(160deg, #001240 0%, #001A52 40%, #007DBA 100%);
+    padding: 56px 40px 48px;
+    position: relative;
+    overflow: hidden;
+}
+
+.page-hero h1 {
+    color: #ffffff;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+}
+
+.page-hero h1 .hero-highlight {
+    color: var(--gold);
+    font-style: normal;
+    font-family: var(--font-body);
+}
+
+.page-hero p {
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 14px;
+    margin: 0;
+    letter-spacing: 0.02em;
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 2px;
+    margin-bottom: 20px;
+}
+
+/* ── SEPARADOR DE SEÇÃO ────────────────────────────────── */
+.section-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 36px 0 20px;
+}
+
+.section-label::before,
+.section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+}
+
+.section-label span {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gray-300);
+    white-space: nowrap;
+}
+
+/* ── AVISO PESO NEGATIVO ───────────────────────────────── */
+.aviso-inline {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--warning-bg);
+    border-left: 3px solid var(--warning-bd);
+    color: var(--warning-tx);
+    padding: 11px 16px;
+    border-radius: 0 var(--radius) var(--radius) 0;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 18px;
+}
+
+/* ── GRID DE PESOS ─────────────────────────────────────── */
+.grid-pesos {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+@media (max-width: 900px) { .grid-pesos { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .grid-pesos { grid-template-columns: 1fr; } }
+
+.grid-pesos .form-group {
+    margin: 0;
+}
+
+/* ── BLOCO DE DETALHES DO CÁLCULO ──────────────────────── */
+.detalhe-bloco {
+    background: linear-gradient(135deg, #f0f4ff 0%, var(--white) 100%);
+    border: 1px solid rgba(1, 33, 105, 0.1);
+    border-left: 4px solid var(--navy);
+    border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+}
+
+.detalhe-titulo {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(1, 33, 105, 0.1);
+}
+
+.detalhe-linha {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(1, 33, 105, 0.06);
+    font-size: 14px;
+}
+
+.detalhe-linha:last-child { border-bottom: none; padding-bottom: 0; }
+
+.detalhe-linha.indent { padding-left: 18px; }
+
+.detalhe-linha .dl { color: var(--gray-500); }
+
+.detalhe-linha .dv {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    color: var(--navy);
+    font-size: 15px;
+    letter-spacing: -0.02em;
+}
+
+/* ── CARDS DE RESULTADO ────────────────────────────────── */
+.resultado-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+@media (max-width: 600px) { .resultado-grid { grid-template-columns: 1fr; } }
+
+.res-card {
+    background: var(--gray-50);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 20px 22px;
+}
+
+.res-card label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gray-300);
+    margin-bottom: 8px;
+    display: block;
+}
+
+/* IMPORTANTE: !important aqui é necessário para vencer os
+   estilos inline aplicados pela função setResultado() do script.js.
+   Sem isso, o JS sobrescreve o visual do design system. */
+.res-card input[readonly] {
+    border: none !important;
+    background: transparent !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    font-size: 22px !important;
+    font-family: var(--font-serif) !important;
+    font-weight: 700 !important;
+    color: var(--navy) !important;
+    width: 100%;
+    box-shadow: none !important;
+}
+
+.res-card input[readonly]:hover,
+.res-card input[readonly]:focus {
+    box-shadow: none !important;
+    outline: none;
+    border: none !important;
+}
+
+.res-card.total {
+    background: linear-gradient(135deg, #fff8e1 0%, #fff3cd 100%);
+    border: 2px solid var(--gold);
+    grid-column: 1 / -1;
+}
+
+.res-card.total label { color: var(--warning-tx); }
+
+.res-card.total input[readonly] {
+    font-size: 30px !important;
+    color: var(--danger) !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+}
+
+/* ── ÍCONES SVG NOS CARDS ──────────────────────────────── */
+.card-icon svg {
+    width: 18px;
+    height: 18px;
+    display: block;
+}
+
+/* ── NAVBAR — LOGO WRAPPER ─────────────────────────────── */
+.navbar-logo-wrap {
+    background: white;
+    border-radius: 4px;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    line-height: 0;
+}
+
+.navbar-logo-wrap img {
+    height: 28px;
+    width: auto;
+    display: block;
+}
+
+.navbar-divider {
+    width: 1px;
+    height: 22px;
+    background: rgba(255, 255, 255, 0.15);
+    margin: 0 16px;
+    flex-shrink: 0;
+}
+
+.navbar-title {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: 0.02em;
+}
+
+.navbar-title span {
+    color: var(--gold);
+    font-weight: 400;
+}
+
+/* ── CARD RESULTADO SEM HOVER ──────────────────────────── */
+.card-result:hover { transform: none; }
+
+
+/* ============================================================
+   ─── INVOICE / VISUALIZAÇÃO INLINE DA NOTA ───
+   Estilos para o HTML injetado pela função gerarVisual()
+   do visual.js. Mantém a paleta navy + dourado do design.
+   ============================================================ */
+
+#secao-visual {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: 36px 40px;
+    margin-bottom: 24px;
+    animation: fadeUp 0.35s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+@media (max-width: 768px) {
+    #secao-visual { padding: 24px; }
+}
+
+/* ── Cabeçalho da nota ── */
+.invoice-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+    padding-bottom: 20px;
+    margin-bottom: 24px;
+    border-bottom: 2px solid var(--navy);
+}
+
+.invoice-title h1 {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    color: var(--navy);
+    margin-bottom: 6px;
+    letter-spacing: -0.02em;
+}
+
+.invoice-subtitle {
+    color: var(--gray-500);
+    font-size: 13px;
+    margin: 0;
+}
+
+.invoice-info {
+    text-align: right;
+    font-size: 12px;
+    color: var(--gray-500);
+}
+
+.invoice-info p {
+    margin: 3px 0;
+}
+
+.invoice-info strong {
+    color: var(--gray-700);
+}
+
+@media (max-width: 600px) {
+    .invoice-header { flex-direction: column; }
+    .invoice-info   { text-align: left; }
+}
+
+/* ── Badge tipo de cálculo ── */
+.badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 2px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: white;
+    margin-left: 4px;
+}
+
+.badge-info    { background: var(--navy); }
+.badge-warning { background: var(--gold); color: var(--gray-900); }
+
+/* ── Grid 2 colunas ── */
+.invoice-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+@media (max-width: 600px) {
+    .invoice-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Caixa de seção da invoice ── */
+.invoice-section {
+    background: var(--ivory);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 16px 18px;
+}
+
+.invoice-section-title {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin: 0 0 12px 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+}
+
+.invoice-data {
+    display: flex;
+    flex-direction: column;
+}
+
+.invoice-line {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 7px 0;
+    border-bottom: 1px dotted var(--border);
+    font-size: 13px;
+}
+
+.invoice-line:last-child { border-bottom: none; }
+
+.invoice-line .label {
+    color: var(--gray-500);
+    flex-shrink: 0;
+}
+
+.invoice-line .value {
+    font-weight: 600;
+    color: var(--gray-900);
+    text-align: right;
+    word-break: break-word;
+}
+
+.invoice-line.highlight .value {
+    color: var(--danger);
+    font-weight: 700;
+}
+
+/* ── Divisor ── */
+.invoice-divider {
+    border: none;
+    height: 1px;
+    background: var(--border);
+    margin: 22px 0;
+}
+
+/* ── Bloco de cálculos ── */
+.invoice-calculos h2 {
+    font-family: var(--font-serif);
+    font-size: 16px;
+    color: var(--navy);
+    margin: 0 0 16px 0;
+}
+
+.calculos-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 22px;
+}
+
+@media (max-width: 600px) {
+    .calculos-grid { grid-template-columns: 1fr; }
+}
+
+.calculo-item {
+    background: #F5F7FF;
+    border: 1px solid rgba(1, 33, 105, 0.08);
+    border-left: 3px solid var(--navy);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    padding: 12px 16px;
+}
+
+.calculo-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray-500);
+    margin: 0 0 4px 0;
+}
+
+.calculo-valor {
+    font-family: var(--font-serif);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 0;
+    letter-spacing: -0.02em;
+}
+
+/* ── Impostos recuperáveis ── */
+.calculos-impostos h3 {
+    font-family: var(--font-serif);
+    font-size: 14px;
+    color: var(--navy);
+    margin: 0 0 12px 0;
+}
+
+.calculos-impostos .impostos-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+@media (max-width: 600px) {
+    .calculos-impostos .impostos-grid { grid-template-columns: 1fr; }
+}
+
+.imposto-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--gray-50);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    font-size: 13px;
+}
+
+.imposto-label { color: var(--gray-500); }
+
+.imposto-valor {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    color: var(--navy);
+}
+
+/* ── Resumo final ── */
+.invoice-resumo {
+    background: var(--gold-pale);
+    border: 1.5px solid var(--gold);
+    border-radius: var(--radius-lg);
+    padding: 18px 24px;
+    margin-top: 8px;
+}
+
+.resumo-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    font-size: 14px;
+}
+
+.resumo-label { color: var(--gray-700); }
+
+.resumo-valor {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    color: var(--navy);
+    font-size: 15px;
+}
+
+.resumo-item.total {
+    border-top: 1.5px solid var(--gold);
+    margin-top: 8px;
+    padding-top: 14px;
+}
+
+.resumo-item.total .resumo-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--warning-tx);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.resumo-valor-total {
+    font-family: var(--font-serif);
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--danger);
+    letter-spacing: -0.02em;
+}
