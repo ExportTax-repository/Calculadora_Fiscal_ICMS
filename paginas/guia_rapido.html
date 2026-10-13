@@ -3,166 +3,190 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Guia Rápido — Nota de Débito · ADM</title>
+  <title>Guia de uso: nota de débito | ADM</title>
+  <meta name="theme-color" content="#012169">
   <link rel="icon" type="image/png" href="../img/adm-logo.png">
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/guia.css">
 </head>
 <body>
 
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
 <!-- ═══════════════ NAVBAR ═══════════════ -->
-<nav class="navbar">
-  <div class="navbar-container">
-    <div class="navbar-brand">
-      <div class="navbar-logo-wrap">
-        <img src="../img/adm-logo.png" alt="ADM">
-      </div>
-      <div class="navbar-divider"></div>
-      <h1 class="navbar-title">Nota de Débito <span>· Guia Rápido</span></h1>
-    </div>
-    <ul class="navbar-links">
-      <li><a href="../index.html">← Voltar à Calculadora</a></li>
+<header class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">
+      <img class="navbar-logo" src="../img/adm-logo-negativo.png" alt="ADM" width="50" height="38">
+      <span class="navbar-title">Nota de débito</span>
+    </a>
+    <nav class="navbar-menu" aria-label="Navegação principal">
+      <ul class="navbar-links">
+        <li><a href="../index.html">Voltar à calculadora</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="page guide" id="conteudo" tabindex="-1">
+
+  <header class="page-header">
+    <h1>Guia de uso</h1>
+    <p class="page-lead">Como preencher a calculadora, como o valor é calculado e um exemplo completo, conferido com a própria calculadora.</p>
+  </header>
+
+  <!-- ═══════════ PASSO A PASSO ═══════════ -->
+  <section class="guide-section" aria-labelledby="titulo-passos">
+    <h2 id="titulo-passos">Passo a passo</h2>
+    <ul class="steps">
+      <li class="steps-item">
+        <span class="step" aria-hidden="true">1</span>
+        <div>
+          <h3><span class="sr-only">Passo 1: </span>Produto e rota</h3>
+          <p>Escolha o produto e as UFs de origem e de destino. A alíquota de ICMS é preenchida pelo par de UFs. Milho, algodão e sorgo também recuperam PIS e COFINS.</p>
+        </div>
+      </li>
+      <li class="steps-item">
+        <span class="step" aria-hidden="true">2</span>
+        <div>
+          <h3><span class="sr-only">Passo 2: </span>Pesos</h3>
+          <p>Informe o peso de saída e o de destino, em quilos. O peso sinistrado e o percentual de perda são calculados na hora. Se nada chegou ao destino, informe 0.</p>
+        </div>
+      </li>
+      <li class="steps-item">
+        <span class="step" aria-hidden="true">3</span>
+        <div>
+          <h3><span class="sr-only">Passo 3: </span>Valores</h3>
+          <p>Informe o valor da NF de saída e, se houver, o do frete. Digite só os números: os centavos entram automaticamente (5000000 vira 50.000,00).</p>
+        </div>
+      </li>
+      <li class="steps-item">
+        <span class="step step--outline step--range" aria-hidden="true">4–6</span>
+        <div>
+          <h3><span class="sr-only">Passos 4 a 6: </span>Dados da nota de débito</h3>
+          <p>Transportador, fornecedor e documentos não alteram o valor, mas identificam a nota no PDF. CPF e CNPJ, inclusive o CNPJ alfanumérico, são conferidos pelos dígitos verificadores.</p>
+        </div>
+      </li>
+      <li class="steps-item">
+        <span class="step step--done" aria-hidden="true">
+          <svg viewBox="0 0 24 24" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+        </span>
+        <div>
+          <h3><span class="sr-only">Por fim: </span>Resultado e PDF</h3>
+          <p>O painel de resultado mostra o status: <em>Incompleto</em> lista o que falta; <em>Calculado</em> indica que a nota pode ser gerada. Clique em “Gerar PDF da nota” e, na impressão, escolha “Salvar como PDF” ou uma impressora.</p>
+        </div>
+      </li>
     </ul>
-  </div>
-</nav>
+  </section>
 
-<!-- ═══════════════ CONTAINER ═══════════════ -->
-<div class="guia-container">
-
-  <!-- HERO -->
-  <div class="guia-hero">
-    <div class="guia-eyebrow">Guia de Uso</div>
-    <h1>Como usar a Calculadora</h1>
-    <p>Entenda o cálculo de indenizações passo a passo, de forma clara e transparente.</p>
-  </div>
-
-  <!-- CORPO -->
-  <div class="guia-body">
-
-    <h2 class="section-title">Passo a Passo</h2>
-    <div class="passos">
-      <div class="passo">
-        <div class="passo-num">1</div>
-        <div>
-          <h3>Preencha os dados do Transportador</h3>
-          <p>Informe a Filial ADM, Razão Social e CNPJ da empresa transportadora responsável pelo sinistro.</p>
-        </div>
-      </div>
-      <div class="passo">
-        <div class="passo-num">2</div>
-        <div>
-          <h3>Selecione o Produto e informe os Documentos</h3>
-          <p>O produto determina se PIS e COFINS se aplicam (Milho, Algodão e Sorgo). Informe NF Lote, CT-e e NF Venda com suas respectivas datas.</p>
-        </div>
-      </div>
-      <div class="passo">
-        <div class="passo-num">3</div>
-        <div>
-          <h3>Informe os Pesos e Valores <em class="passo-obs">(campos críticos)</em></h3>
-          <p>Digite o peso que saiu na origem e o que chegou no destino. O sistema calcula automaticamente o peso sinistrado e o % de perda. Informe o valor da NF e do frete.</p>
-        </div>
-      </div>
-      <div class="passo">
-        <div class="passo-num">4</div>
-        <div>
-          <h3>Selecione UF Origem e Destino</h3>
-          <p>A alíquota de ICMS é preenchida automaticamente. Se a origem for <strong>MT</strong>, o sistema aplica cálculo direto (sem Gross-Up).</p>
-        </div>
-      </div>
-      <div class="passo">
-        <div class="passo-num">5</div>
-        <div>
-          <h3>Veja o resultado detalhado</h3>
-          <p>O sistema exibe cada componente: base mercadoria, base frete, ICMS, PIS, COFINS e o total a pagar. Use os botões para visualizar, imprimir ou gerar PDF.</p>
-        </div>
-      </div>
-    </div>
-
-    <h2 class="section-title">Como o Cálculo Funciona</h2>
+  <!-- ═══════════ COMO O CÁLCULO FUNCIONA ═══════════ -->
+  <section class="guide-section" aria-labelledby="titulo-calculo">
+    <h2 id="titulo-calculo">Como o cálculo funciona</h2>
 
     <div class="formula">
-      <span class="formula-label">Passo 1 — Proporção de perda</span>
-      Peso Sinistrado = Peso Saída − Peso Destino<br>
-      % Perda = (Peso Sinistrado ÷ Peso Saída) × 100
+      <h3 class="formula-title">1. Perda</h3>
+      <p>Peso sinistrado = peso de saída − peso de destino</p>
+      <p>Proporção da perda = peso sinistrado ÷ peso de saída</p>
     </div>
+
     <div class="formula">
-      <span class="formula-label">Passo 2 — Bases proporcionais</span>
-      Base Mercadoria = Valor NF × % Perda<br>
-      Base Frete = Valor Frete × % Perda
+      <h3 class="formula-title">2. Bases proporcionais</h3>
+      <p>Base da mercadoria = valor da NF de saída × proporção da perda</p>
+      <p>Base do frete = valor do frete × proporção da perda</p>
     </div>
+
     <div class="formula">
-      <span class="formula-label">Passo 3 — Gross-Up (recuperar impostos)</span>
-      Fator = (100 − ICMS − PIS − COFINS) ÷ 100<br>
-      Valor Gross-Up = Base Mercadoria ÷ Fator<br>
-      ICMS = Valor Gross-Up × ICMS% &nbsp;·&nbsp; PIS = × 1,65% &nbsp;·&nbsp; COFINS = × 7,60%
-    </div>
-    <div class="formula formula-gold">
-      <span class="formula-label">Total a Pagar</span>
-      Total = Base Mercadoria + ICMS Merc. + ICMS Frete + PIS + COFINS
+      <h3 class="formula-title">3. Impostos com gross-up (origem fora de MT)</h3>
+      <p>Fator = (100 − ICMS − PIS − COFINS) ÷ 100</p>
+      <p>Valor com impostos = base da mercadoria ÷ fator</p>
+      <p>ICMS, PIS e COFINS da mercadoria = valor com impostos × alíquota de cada um</p>
+      <p>ICMS do frete = (base do frete ÷ ((100 − ICMS) ÷ 100)) × ICMS</p>
+      <p class="formula-note">PIS 1,65% e COFINS 7,60% só para milho, algodão e sorgo; nos demais produtos, ambos são zero.</p>
     </div>
 
-    <h2 class="section-title">Exemplo Prático</h2>
+    <div class="formula">
+      <h3 class="formula-title">4. Impostos sem gross-up (origem MT)</h3>
+      <p>ICMS, PIS e COFINS da mercadoria = base da mercadoria × alíquota de cada um</p>
+      <p>ICMS do frete = base do frete × ICMS</p>
+    </div>
 
-    <div class="exemplo-grid">
-      <div class="exemplo-col">
-        <h4>Dados de Entrada</h4>
-        <div class="ex-linha"><span class="el">Peso Saída</span><span class="ev">1.000 kg</span></div>
-        <div class="ex-linha"><span class="el">Peso Destino</span><span class="ev">800 kg</span></div>
-        <div class="ex-linha"><span class="el">Peso Sinistrado</span><span class="ev">200 kg (20%)</span></div>
-        <div class="ex-linha"><span class="el">Valor NF</span><span class="ev">R$ 50.000</span></div>
-        <div class="ex-linha"><span class="el">Valor Frete</span><span class="ev">R$ 2.000</span></div>
-        <div class="ex-linha"><span class="el">ICMS</span><span class="ev">18%</span></div>
+    <div class="formula formula--total">
+      <h3 class="formula-title">5. Total à pagar</h3>
+      <p>Total = base da mercadoria + ICMS da mercadoria + ICMS do frete + PIS + COFINS</p>
+    </div>
+  </section>
+
+  <!-- ═══════════ EXEMPLO ═══════════ -->
+  <section class="guide-section" aria-labelledby="titulo-exemplo">
+    <h2 id="titulo-exemplo">Exemplo completo</h2>
+    <p class="guide-text">Milho em grão, de MG para MG (ICMS de 18%), com gross-up. Os valores abaixo são os mesmos que a calculadora apresenta para estes dados.</p>
+
+    <div class="example">
+      <div class="example-col">
+        <h3 class="example-title">Dados informados</h3>
+        <dl class="data-list">
+          <div class="data-row"><dt>Peso de saída</dt><dd>1.000 kg</dd></div>
+          <div class="data-row"><dt>Peso de destino</dt><dd>800 kg</dd></div>
+          <div class="data-row"><dt>Valor da NF de saída</dt><dd>R$ 50.000,00</dd></div>
+          <div class="data-row"><dt>Valor do frete</dt><dd>R$ 2.000,00</dd></div>
+          <div class="data-row"><dt>ICMS (MG → MG)</dt><dd>18%</dd></div>
+          <div class="data-row"><dt>PIS e COFINS</dt><dd>1,65% e 7,60%</dd></div>
+        </dl>
       </div>
-      <div class="exemplo-col">
-        <h4>Resultado</h4>
-        <div class="ex-linha"><span class="el">Base Mercadoria</span><span class="ev">R$ 10.000,00</span></div>
-        <div class="ex-linha"><span class="el">Base Frete</span><span class="ev">R$ 400,00</span></div>
-        <div class="ex-linha"><span class="el">ICMS Mercadoria</span><span class="ev">R$ 2.195,12</span></div>
-        <div class="ex-linha"><span class="el">ICMS Frete</span><span class="ev">R$ 87,80</span></div>
-        <div class="ex-linha"><span class="el">PIS</span><span class="ev">R$ 201,22</span></div>
-        <div class="ex-linha"><span class="el">COFINS</span><span class="ev">R$ 927,93</span></div>
+
+      <div class="example-col">
+        <h3 class="example-title">Cálculo</h3>
+        <dl class="data-list">
+          <div class="data-row"><dt>Peso sinistrado</dt><dd>200 kg (20,00%)</dd></div>
+          <div class="data-row"><dt>Base da mercadoria</dt><dd>R$ 10.000,00</dd></div>
+          <div class="data-row"><dt>Base do frete</dt><dd>R$ 400,00</dd></div>
+          <div class="data-row"><dt>Fator</dt><dd>0,7275</dd></div>
+          <div class="data-row"><dt>Valor com impostos</dt><dd>R$ 13.745,70</dd></div>
+          <div class="data-row"><dt>ICMS sobre a mercadoria</dt><dd>R$ 2.474,23</dd></div>
+          <div class="data-row"><dt>ICMS sobre o frete</dt><dd>R$ 87,80</dd></div>
+          <div class="data-row"><dt>PIS</dt><dd>R$ 226,80</dd></div>
+          <div class="data-row"><dt>COFINS</dt><dd>R$ 1.044,67</dd></div>
+        </dl>
       </div>
     </div>
 
-    <div class="total-box">
-      <div class="tl">Total à Pagar</div>
-      <div class="tv">R$ 13.412,07</div>
+    <div class="example-total">
+      <span class="example-total-label">Total à pagar</span>
+      <span class="example-total-value">R$ 13.833,51</span>
     </div>
+  </section>
 
-    <h2 class="section-title">Dúvidas Frequentes</h2>
+  <!-- ═══════════ DÚVIDAS ═══════════ -->
+  <section class="faq guide-section" aria-labelledby="titulo-duvidas">
+    <h2 class="faq-title" id="titulo-duvidas">Dúvidas frequentes</h2>
 
-    <div class="faq-item">
-      <h3>Por que preciso de dois pesos?</h3>
-      <p>Um é o peso ao sair da origem, outro ao chegar no destino. A diferença é a perda sinistrada que será indenizada.</p>
-    </div>
-    <div class="faq-item">
-      <h3>O que muda no cálculo para MT?</h3>
-      <p>Em MT, os impostos são aplicados diretamente sobre a base proporcional, sem o ajuste de Gross-Up.</p>
-    </div>
-    <div class="faq-item">
-      <h3>A alíquota ICMS é sempre a mesma?</h3>
-      <p>Não. Varia por par origem-destino. Por isso, selecione as UFs corretamente — o sistema preenche automaticamente.</p>
-    </div>
-    <div class="faq-item">
-      <h3>PIS e COFINS se aplicam a todos os produtos?</h3>
-      <p>Não. Apenas Milho, Algodão e Sorgo. Os demais recebem somente ICMS.</p>
-    </div>
+    <details class="faq-item">
+      <summary>Por que preciso de dois pesos?</summary>
+      <div class="faq-answer"><p>Um é o peso na saída da origem; o outro, o peso que chegou ao destino. A diferença é a perda sinistrada que será indenizada.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary>O que muda no cálculo para MT?</summary>
+      <div class="faq-answer"><p>Com origem em Mato Grosso, os impostos são aplicados diretamente sobre a base proporcional, sem o ajuste de gross-up.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary>A alíquota de ICMS é sempre a mesma?</summary>
+      <div class="faq-answer"><p>Não. Ela varia pelo par de UFs de origem e destino e é preenchida automaticamente quando as duas são selecionadas.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary>PIS e COFINS se aplicam a todos os produtos?</summary>
+      <div class="faq-answer"><p>Não. Só milho, algodão e sorgo. Para os demais, apenas o ICMS é recuperado, e a calculadora avisa ao escolher o produto.</p></div>
+    </details>
+  </section>
 
-  </div><!-- /guia-body -->
-</div><!-- /guia-container -->
+</main>
 
 <!-- ═══════════════ FOOTER ═══════════════ -->
 <footer class="footer">
-  <div class="footer-content">
-    <div class="footer-brand">
-      <img src="../img/adm-logo.png" alt="ADM">
-    </div>
-    <div class="footer-center">
-      <p>Calculadora de Notas de Débito &mdash; Sinistros em Transporte<br>
-      <span>ADM do Brasil &nbsp;·&nbsp; 2026</span></p>
-    </div>
+  <div class="footer-inner">
+    <img class="footer-logo" src="../img/adm-logo-negativo.png" alt="ADM" width="58" height="44">
+    <p class="footer-text">Calculadora de nota de débito para sinistros no transporte<br><span>ADM do Brasil, 2026</span></p>
     <ul class="footer-links">
-      <li><a href="../index.html">← Calculadora</a></li>
+      <li><a href="../index.html">Calculadora</a></li>
     </ul>
   </div>
 </footer>

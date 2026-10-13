@@ -3,227 +3,95 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nota de Débito — Calculadora de Indenizações</title>
+  <title>Nota de débito: indenização por sinistro | ADM</title>
+  <meta name="description" content="Calculadora de nota de débito para indenização de sinistros no transporte, com ICMS, PIS e COFINS recuperáveis.">
+  <meta name="theme-color" content="#012169">
   <link rel="icon" type="image/png" href="./img/adm-logo.png">
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/index.css">
 </head>
 <body>
 
+<a class="skip-link" href="#formulario">Pular para a calculadora</a>
+
 <!-- ═══════════════ NAVBAR ═══════════════ -->
-<nav class="navbar">
-  <div class="navbar-container">
-    <div class="navbar-brand">
-      <div class="navbar-logo-wrap">
-        <img src="./img/adm-logo.png" alt="ADM">
-      </div>
-      <div class="navbar-divider"></div>
-      <h1 class="navbar-title">Nota de Débito <span>· Indenizações</span></h1>
-    </div>
-    <ul class="navbar-links">
-      <li><a href="#formulario" class="active">Calculadora</a></li>
-      <li><a href="#resultado">Resultado</a></li>
-      <li><a href="./paginas/guia_rapido.html">Guia</a></li>
-      <li><a href="#faq">Dúvidas</a></li>
-    </ul>
+<header class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="#topo">
+      <img class="navbar-logo" src="./img/adm-logo-negativo.png" alt="ADM" width="50" height="38">
+      <span class="navbar-title">Nota de débito</span>
+    </a>
+
+    <button type="button" class="navbar-toggle" id="navbar-toggle" aria-expanded="false" aria-controls="navbar-menu">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <span class="sr-only">Menu</span>
+    </button>
+
+    <nav class="navbar-menu is-collapsible" id="navbar-menu" aria-label="Navegação principal">
+      <ul class="navbar-links">
+        <li><a href="#formulario" class="is-active">Calculadora</a></li>
+        <li><a href="#historico">Histórico <span class="nav-count" id="historico-contador" hidden></span></a></li>
+        <li><a href="./paginas/guia_rapido.html" target="_blank" rel="noopener">Guia<span class="sr-only"> (abre em nova aba)</span></a></li>
+        <li><a href="#faq">Dúvidas</a></li>
+      </ul>
+    </nav>
   </div>
-</nav>
+</header>
 
-<!-- ═══════════════ CONTAINER PRINCIPAL ═══════════════ -->
-<div class="container">
+<main class="page" id="topo">
 
-  <!-- HERO -->
-  <div class="page-hero">
-    <h1>Cálculo para Indenizações por Sinistro</h1>
-    <p>Imposto embutido de forma automática · ICMS, PIS e COFINS recuperáveis</p>
-  </div>
+  <header class="page-header">
+    <h1>Indenização por sinistro no transporte</h1>
+    <p class="page-lead">Preencha produto, rota, pesos e valores. O resultado é recalculado a cada alteração e a nota de débito sai em PDF.</p>
+  </header>
 
-  <!-- CONTEÚDO -->
-  <div class="content-wrapper">
+  <div class="calc-layout">
 
     <!-- ═══════════ FORMULÁRIO ═══════════ -->
-    <section id="formulario">
+    <div class="calc-main" id="formulario" tabindex="-1">
 
-      <!-- TRANSPORTADOR -->
-      <div class="card card-primary">
-        <div class="card-header">
-          <span class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="1" y="3" width="15" height="13" rx="1"/>
-              <path d="M16 8h4l3 4v4h-7V8z"/>
-              <circle cx="5.5" cy="18.5" r="2.5"/>
-              <circle cx="18.5" cy="18.5" r="2.5"/>
-            </svg>
-          </span>
-          <h2>Transportador</h2>
-        </div>
-        <div class="card-body">
-          <div class="form-row">
-            <div class="form-group">
-              <label for="filial">Filial ADM</label>
-              <input type="text" id="filial" placeholder="Ex: 1202" data-mascara="numero">
-            </div>
-            <div class="form-group">
-              <label for="razao-social">Razão Social</label>
-              <input type="text" id="razao-social" placeholder="Nome da empresa transportadora">
-            </div>
-            <div class="form-group">
-              <label for="cnpj">CNPJ</label>
-              <input type="text" id="cnpj" placeholder="00.000.000/0000-00" data-mascara="cnpj">
-            </div>
-          </div>
-        </div>
-      </div>
+      <!-- DADOS DO CÁLCULO -->
+      <section class="panel" aria-labelledby="titulo-calculo">
+        <header class="panel-header">
+          <h2 class="panel-title" id="titulo-calculo">Dados do cálculo</h2>
+          <p class="panel-desc">Campos com <span class="req" aria-hidden="true">*</span><span class="sr-only">asterisco</span> são obrigatórios.</p>
+        </header>
 
-      <!-- PRODUTO E DOCUMENTOS -->
-      <div class="card card-info">
-        <div class="card-header">
-          <span class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
-            </svg>
-          </span>
-          <h2>Produto e Documentos</h2>
-        </div>
-        <div class="card-body">
+        <!-- 1. Produto e rota -->
+        <fieldset class="form-section">
+          <legend class="form-section-title"><span class="step" aria-hidden="true">1</span>Produto e rota</legend>
 
-          <div class="form-group">
-            <label for="produto">Produto</label>
-            <select id="produto">
-              <option value="">— Selecione o produto —</option>
-              <option value="ALGODÃO">ALGODÃO</option>
-              <option value="SOJA EM GRAOS">SOJA EM GRÃOS</option>
-              <option value="MILHO EM GRAO">MILHO EM GRÃO</option>
-              <option value="FARELO DE SOJA HIPRO 101004">FARELO DE SOJA HIPRO 101004</option>
-              <option value="FARELO DE SOJA TPII46%PROT GRAN">FARELO DE SOJA TPII 46% PROT GRAN</option>
-              <option value="GLICERINA">GLICERINA</option>
-              <option value="TRIGO EM GRAOS PN">TRIGO EM GRÃOS PN</option>
-              <option value="TRIGO RAÇÃO">TRIGO RAÇÃO</option>
-              <option value="107001 OLEO SOJA DEGOMADO G">107001 ÓLEO SOJA DEGOMADO G</option>
-              <option value="107046 - OLEO SOJA RF CORCOVADO">107046 ÓLEO SOJA RF CORCOVADO</option>
-            </select>
-          </div>
-
-          <div id="info-piscofins" class="info-box info-box-warning" style="display:none;">
-            <p>PIS e COFINS <strong>não se aplicam</strong> a este produto.</p>
-          </div>
-
-          <div class="section-label"><span>NF de Lote</span></div>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="nf-lote">Número da NF</label>
-              <input type="text" id="nf-lote" placeholder="Ex: 123456" data-mascara="numero">
-            </div>
-            <div class="form-group">
-              <label for="data-nf-lote">Data</label>
-              <input type="date" id="data-nf-lote">
+          <div class="form-grid">
+            <div class="field">
+              <label class="field-label" for="produto">Produto <span class="req" aria-hidden="true">*</span></label>
+              <select class="input" id="produto" aria-required="true">
+                <option value="">Selecione o produto</option>
+                <option value="ALGODÃO">ALGODÃO</option>
+                <option value="SOJA EM GRAOS">SOJA EM GRÃOS</option>
+                <option value="MILHO EM GRAO">MILHO EM GRÃO</option>
+                <option value="FARELO DE SOJA HIPRO 101004">FARELO DE SOJA HIPRO 101004</option>
+                <option value="FARELO DE SOJA TPII46%PROT GRAN">FARELO DE SOJA TPII 46% PROT GRAN</option>
+                <option value="GLICERINA">GLICERINA</option>
+                <option value="TRIGO EM GRAOS PN">TRIGO EM GRÃOS PN</option>
+                <option value="TRIGO RAÇÃO">TRIGO RAÇÃO</option>
+                <option value="107001 OLEO SOJA DEGOMADO G">107001 ÓLEO SOJA DEGOMADO G</option>
+                <option value="107046 - OLEO SOJA RF CORCOVADO">107046 ÓLEO SOJA RF CORCOVADO</option>
+              </select>
             </div>
           </div>
 
-          <div class="section-label"><span>CT-e — Conhecimento de Transporte</span></div>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="cte">Número do CT-e</label>
-              <input type="text" id="cte" placeholder="Ex: 654321" data-mascara="numero">
-            </div>
-            <div class="form-group">
-              <label for="data-cte">Data</label>
-              <input type="date" id="data-cte">
+          <div id="info-piscofins" class="alert alert-info" style="display:none;">
+            <div class="alert-body">
+              <svg class="alert-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+              <p>PIS e COFINS <strong>não se aplicam</strong> a este produto. Apenas o ICMS é recuperado.</p>
             </div>
           </div>
 
-          <div class="section-label"><span>NF de Venda</span></div>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="nf-venda">Número da NF</label>
-              <input type="text" id="nf-venda" placeholder="Ex: 987654" data-mascara="numero">
-            </div>
-            <div class="form-group">
-              <label for="data-nf-venda">Data</label>
-              <input type="date" id="data-nf-venda">
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- PESOS E VALORES -->
-      <div class="card card-warning">
-        <div class="card-header">
-          <span class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 3a3 3 0 100 6 3 3 0 000-6z"/>
-              <path d="M6.5 9H3l3 10h12l3-10h-3.5"/>
-              <line x1="6.5" y1="9" x2="12" y2="6"/>
-              <line x1="17.5" y1="9" x2="12" y2="6"/>
-            </svg>
-          </span>
-          <h2>Pesos e Valores</h2>
-        </div>
-        <div class="card-body">
-
-          <div class="info-box">
-            <p><strong>Campos críticos:</strong> estes valores determinam diretamente o valor da indenização.</p>
-          </div>
-
-          <div class="section-label"><span>Pesos</span></div>
-          <div class="grid-pesos">
-            <div class="form-group">
-              <label for="peso-saida">Peso Saída (kg)</label>
-              <input type="text" id="peso-saida" placeholder="0" data-mascara="peso" inputmode="numeric">
-            </div>
-            <div class="form-group">
-              <label for="peso-destino">Peso Destino (kg)</label>
-              <input type="text" id="peso-destino" placeholder="0" data-mascara="peso" inputmode="numeric">
-            </div>
-            <div class="form-group">
-              <label for="peso-sinistrado">Peso Sinistrado (kg)</label>
-              <input type="text" id="peso-sinistrado" readonly placeholder="—">
-            </div>
-            <div class="form-group">
-              <label for="percentual-perda">% de Perda</label>
-              <input type="text" id="percentual-perda" readonly placeholder="—">
-            </div>
-          </div>
-
-          <div id="aviso-peso-negativo" class="aviso-inline" style="display:none;">
-            ⚠ <span>Peso de destino maior que o de saída — sinistrado travado em <strong>0</strong>.</span>
-          </div>
-
-          <div class="section-label"><span>Valores</span></div>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="valor-nf-saida">Valor NF Saída (R$)</label>
-              <input type="text" id="valor-nf-saida" placeholder="0,00" data-mascara="moeda" inputmode="numeric">
-            </div>
-            <div class="form-group">
-              <label for="valor-frete">Valor do Frete (R$)</label>
-              <input type="text" id="valor-frete" placeholder="0,00" data-mascara="moeda" inputmode="numeric">
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- INFORMAÇÕES FISCAIS -->
-      <div class="card card-success">
-        <div class="card-header">
-          <span class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
-              <polyline points="14 2 14 8 20 8"/>
-              <line x1="16" y1="13" x2="8" y2="13"/>
-              <line x1="16" y1="17" x2="8" y2="17"/>
-            </svg>
-          </span>
-          <h2>Informações Fiscais</h2>
-        </div>
-        <div class="card-body">
-          <div class="form-row">
-            <div class="form-group">
-              <label for="uf-origem">UF Origem</label>
-              <select id="uf-origem">
-                <option value="">— Selecione —</option>
+          <div class="form-grid cols-3">
+            <div class="field">
+              <label class="field-label" for="uf-origem">UF de origem <span class="req" aria-hidden="true">*</span></label>
+              <select class="input" id="uf-origem" aria-required="true">
+                <option value="">Selecione</option>
                 <option>AC</option><option>AL</option><option>AM</option><option>AP</option>
                 <option>BA</option><option>CE</option><option>DF</option><option>ES</option>
                 <option>GO</option><option>MA</option><option>MT</option><option>MS</option>
@@ -231,13 +99,13 @@
                 <option>PE</option><option>PI</option><option>RJ</option><option>RN</option>
                 <option>RS</option><option>RO</option><option>RR</option><option>SC</option>
                 <option>SP</option><option>SE</option><option>TO</option>
-                <option value="IM">IM — Importação</option>
+                <option value="IM">IM (importação)</option>
               </select>
             </div>
-            <div class="form-group">
-              <label for="uf-destino">UF Destino</label>
-              <select id="uf-destino">
-                <option value="">— Selecione —</option>
+            <div class="field">
+              <label class="field-label" for="uf-destino">UF de destino <span class="req" aria-hidden="true">*</span></label>
+              <select class="input" id="uf-destino" aria-required="true">
+                <option value="">Selecione</option>
                 <option>AC</option><option>AL</option><option>AM</option><option>AP</option>
                 <option>BA</option><option>CE</option><option>DF</option><option>ES</option>
                 <option>GO</option><option>MA</option><option>MT</option><option>MS</option>
@@ -245,180 +113,382 @@
                 <option>PE</option><option>PI</option><option>RJ</option><option>RN</option>
                 <option>RS</option><option>RO</option><option>RR</option><option>SC</option>
                 <option>SP</option><option>SE</option><option>TO</option>
-                <option value="IM">IM — Importação</option>
+                <option value="IM">IM (importação)</option>
               </select>
             </div>
-            <div class="form-group">
-              <label for="aliquota-icms">Alíquota ICMS (%)</label>
-              <input type="text" id="aliquota-icms" placeholder="Automático" readonly>
+            <div class="field">
+              <label class="field-label" for="aliquota-icms">Alíquota de ICMS <span class="tag">automática</span></label>
+              <div class="control has-suffix">
+                <input class="input input-num is-computed" type="text" id="aliquota-icms" placeholder="—" readonly tabindex="-1" aria-describedby="dica-aliquota">
+                <span class="affix" aria-hidden="true">%</span>
+              </div>
+              <p class="field-hint" id="dica-aliquota">Definida pelo par de UFs.</p>
             </div>
           </div>
-          <div id="aviso-mt" class="info-box info-box-warning" style="display:none;">
-            <p>Origem <strong>MT</strong> — cálculo sem Gross-Up (impostos diretos sobre a base proporcional).</p>
-          </div>
-        </div>
-      </div>
 
-      <!-- FORNECEDOR / REMETENTE -->
-      <div class="card card-secondary">
-        <div class="card-header">
-          <span class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
-              <circle cx="12" cy="7" r="4"/>
-            </svg>
-          </span>
-          <h2>Fornecedor / Remetente</h2>
-        </div>
-        <div class="card-body">
-          <div class="form-row">
-            <div class="form-group">
-              <label for="fornecedor-nome">Nome / Razão Social</label>
-              <input type="text" id="fornecedor-nome" placeholder="Nome do remetente">
-            </div>
-            <div class="form-group">
-              <label for="fornecedor-doc">CPF / CNPJ</label>
-              <input type="text" id="fornecedor-doc" placeholder="000.000.000-00 ou 00.000.000/0000-00" data-mascara="cpfcnpj">
+          <div id="aviso-mt" class="alert alert-warning" style="display:none;">
+            <div class="alert-body">
+              <svg class="alert-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3 2.5 20h19L12 3z"/><path d="M12 10v4M12 17h.01"/></svg>
+              <p>Origem <strong>MT</strong>: cálculo sem gross-up. Os impostos são aplicados diretamente sobre a base proporcional.</p>
             </div>
           </div>
-        </div>
-      </div>
+        </fieldset>
 
-    </section>
+        <!-- 2. Pesos -->
+        <fieldset class="form-section">
+          <legend class="form-section-title"><span class="step" aria-hidden="true">2</span>Pesos</legend>
+
+          <div class="form-grid cols-2">
+            <div class="field">
+              <label class="field-label" for="peso-saida">Peso de saída<span class="sr-only">, em quilos</span> <span class="req" aria-hidden="true">*</span></label>
+              <div class="control has-suffix">
+                <input class="input input-num" type="text" id="peso-saida" placeholder="0" data-mascara="peso" inputmode="numeric" autocomplete="off" aria-required="true">
+                <span class="affix" aria-hidden="true">kg</span>
+              </div>
+            </div>
+            <div class="field">
+              <label class="field-label" for="peso-destino">Peso de destino<span class="sr-only">, em quilos</span> <span class="req" aria-hidden="true">*</span></label>
+              <div class="control has-suffix">
+                <input class="input input-num" type="text" id="peso-destino" placeholder="0" data-mascara="peso" inputmode="numeric" autocomplete="off" aria-required="true" aria-describedby="dica-peso-destino">
+                <span class="affix" aria-hidden="true">kg</span>
+              </div>
+              <p class="field-hint" id="dica-peso-destino">Se nada chegou ao destino, informe 0.</p>
+            </div>
+          </div>
+
+          <div class="form-grid cols-2">
+            <div class="field">
+              <label class="field-label" for="peso-sinistrado">Peso sinistrado <span class="tag">automático</span></label>
+              <div class="control has-suffix">
+                <input class="input input-num is-computed" type="text" id="peso-sinistrado" placeholder="—" readonly tabindex="-1">
+                <span class="affix" aria-hidden="true">kg</span>
+              </div>
+            </div>
+            <div class="field">
+              <label class="field-label" for="percentual-perda">Percentual de perda <span class="tag">automático</span></label>
+              <div class="control">
+                <input class="input input-num is-computed" type="text" id="percentual-perda" placeholder="—" readonly tabindex="-1">
+              </div>
+            </div>
+          </div>
+
+          <div id="aviso-peso-negativo" class="alert alert-danger" style="display:none;">
+            <div class="alert-body">
+              <svg class="alert-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16.5h.01"/></svg>
+              <p>O peso de destino é <strong>maior</strong> que o de saída. Sem perda não há indenização: confira os dois pesos.</p>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- 3. Valores -->
+        <fieldset class="form-section">
+          <legend class="form-section-title"><span class="step" aria-hidden="true">3</span>Valores</legend>
+
+          <div class="form-grid cols-2">
+            <div class="field">
+              <label class="field-label" for="valor-nf-saida">Valor da NF de saída <span class="req" aria-hidden="true">*</span></label>
+              <div class="control has-prefix">
+                <span class="affix" aria-hidden="true">R$</span>
+                <input class="input input-num" type="text" id="valor-nf-saida" placeholder="0,00" data-mascara="moeda" inputmode="numeric" autocomplete="off" aria-required="true" aria-describedby="dica-valores">
+              </div>
+            </div>
+            <div class="field">
+              <label class="field-label" for="valor-frete">Valor do frete <span class="opt">(opcional)</span></label>
+              <div class="control has-prefix">
+                <span class="affix" aria-hidden="true">R$</span>
+                <input class="input input-num" type="text" id="valor-frete" placeholder="0,00" data-mascara="moeda" inputmode="numeric" autocomplete="off" aria-describedby="dica-valores">
+              </div>
+            </div>
+          </div>
+          <p class="field-hint" id="dica-valores">Digite só os números: os centavos entram automaticamente. Ex.: 5000000 vira 50.000,00.</p>
+        </fieldset>
+      </section>
+
+      <!-- DADOS DA NOTA -->
+      <section class="panel panel--secondary" aria-labelledby="titulo-nota">
+        <header class="panel-header">
+          <h2 class="panel-title" id="titulo-nota">Dados da nota de débito</h2>
+          <p class="panel-desc">Não alteram o valor. Identificam as partes e os documentos no PDF.</p>
+        </header>
+
+        <!-- 4. Transportador -->
+        <fieldset class="form-section">
+          <legend class="form-section-title"><span class="step" aria-hidden="true">4</span>Transportador</legend>
+          <div class="form-grid cols-party">
+            <div class="field">
+              <label class="field-label" for="filial">Filial ADM</label>
+              <input class="input" type="text" id="filial" placeholder="Ex.: 1202" data-mascara="numero" inputmode="numeric" autocomplete="off">
+            </div>
+            <div class="field">
+              <label class="field-label" for="razao-social">Razão social</label>
+              <input class="input" type="text" id="razao-social" placeholder="Nome da transportadora" autocomplete="off">
+            </div>
+            <div class="field">
+              <label class="field-label" for="cnpj">CNPJ</label>
+              <input class="input" type="text" id="cnpj" placeholder="00.000.000/0000-00" data-mascara="cnpj" autocomplete="off" autocapitalize="characters" spellcheck="false">
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- 5. Fornecedor -->
+        <fieldset class="form-section">
+          <legend class="form-section-title"><span class="step" aria-hidden="true">5</span>Fornecedor ou remetente</legend>
+          <div class="form-grid cols-2">
+            <div class="field">
+              <label class="field-label" for="fornecedor-nome">Nome ou razão social</label>
+              <input class="input" type="text" id="fornecedor-nome" placeholder="Nome do remetente" autocomplete="off">
+            </div>
+            <div class="field">
+              <label class="field-label" for="fornecedor-doc">CPF ou CNPJ</label>
+              <input class="input" type="text" id="fornecedor-doc" placeholder="CPF ou CNPJ" data-mascara="cpfcnpj" autocomplete="off" autocapitalize="characters" spellcheck="false">
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- 6. Documentos -->
+        <fieldset class="form-section">
+          <legend class="form-section-title"><span class="step" aria-hidden="true">6</span>Documentos</legend>
+          <div class="doc-rows">
+            <div class="form-grid cols-doc">
+              <div class="field">
+                <label class="field-label" for="nf-lote">Número da NF de lote</label>
+                <input class="input" type="text" id="nf-lote" placeholder="Ex.: 123456" data-mascara="numero" inputmode="numeric" autocomplete="off">
+              </div>
+              <div class="field">
+                <label class="field-label" for="data-nf-lote">Data da NF de lote</label>
+                <input class="input" type="date" id="data-nf-lote">
+              </div>
+            </div>
+            <div class="form-grid cols-doc">
+              <div class="field">
+                <label class="field-label" for="cte">Número do CT-e</label>
+                <input class="input" type="text" id="cte" placeholder="Ex.: 654321" data-mascara="numero" inputmode="numeric" autocomplete="off">
+              </div>
+              <div class="field">
+                <label class="field-label" for="data-cte">Data do CT-e</label>
+                <input class="input" type="date" id="data-cte">
+              </div>
+            </div>
+            <div class="form-grid cols-doc">
+              <div class="field">
+                <label class="field-label" for="nf-venda">Número da NF de venda</label>
+                <input class="input" type="text" id="nf-venda" placeholder="Ex.: 987654" data-mascara="numero" inputmode="numeric" autocomplete="off">
+              </div>
+              <div class="field">
+                <label class="field-label" for="data-nf-venda">Data da NF de venda</label>
+                <input class="input" type="date" id="data-nf-venda">
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </section>
+
+    </div><!-- /calc-main -->
 
     <!-- ═══════════ RESULTADO ═══════════ -->
-    <section id="resultado">
-      <div class="card card-result">
-        <div class="card-header">
-          <span class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="18" y1="20" x2="18" y2="10"/>
-              <line x1="12" y1="20" x2="12" y2="4"/>
-              <line x1="6"  y1="20" x2="6"  y2="14"/>
-            </svg>
+    <aside class="calc-aside" id="resultado" aria-labelledby="titulo-resultado" tabindex="-1">
+      <section class="summary" data-status="vazio" id="painel-resultado">
+
+        <header class="summary-header">
+          <h2 class="summary-title" id="titulo-resultado">Resultado</h2>
+          <span class="chip" id="status-calculo">
+            <svg class="chip-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/></svg>
+            <span id="status-texto">Aguardando dados</span>
           </span>
-          <h2>Cálculo da Indenização</h2>
+        </header>
+
+        <p class="summary-method" id="resumo-metodo">Informe produto e rota para definir o método.</p>
+
+        <!-- Composição do total, no formato de livro-razão -->
+        <div class="ledger">
+          <div class="ledger-row">
+            <label class="ledger-label" for="res-mercadoria">Ressarcimento da mercadoria</label>
+            <output class="ledger-value" id="res-mercadoria">R$ 0,00</output>
+          </div>
+          <div class="ledger-row">
+            <label class="ledger-label" for="res-impostos">Ressarcimento de impostos</label>
+            <output class="ledger-value" id="res-impostos">R$ 0,00</output>
+          </div>
+          <div class="ledger-row ledger-total">
+            <label class="ledger-label" for="res-total">Total à pagar</label>
+            <output class="ledger-value" id="res-total">R$ 0,00</output>
+          </div>
         </div>
-        <div class="card-body">
 
-          <div class="detalhe-bloco">
-            <div class="detalhe-titulo">Bases Proporcionais</div>
-            <div class="detalhe-linha">
-              <span class="dl">Base Mercadoria (perda proporcional)</span>
-              <span class="dv" id="detalhe-base-merc">R$ 0,00</span>
-            </div>
-            <div class="detalhe-linha">
-              <span class="dl">Base Frete (perda proporcional)</span>
-              <span class="dv" id="detalhe-base-frete">R$ 0,00</span>
-            </div>
+        <div class="alert alert-warning alert-compact" id="pendencias" hidden>
+          <div class="alert-body">
+            <svg class="alert-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3 2.5 20h19L12 3z"/><path d="M12 10v4M12 17h.01"/></svg>
+            <p id="pendencias-texto"></p>
           </div>
-
-          <div class="detalhe-bloco">
-            <div class="detalhe-titulo">Impostos Recuperáveis</div>
-            <div class="detalhe-linha indent">
-              <span class="dl">ICMS — Mercadoria</span>
-              <span class="dv" id="detalhe-icms-merc">R$ 0,00</span>
-            </div>
-            <div class="detalhe-linha indent">
-              <span class="dl">ICMS — Frete</span>
-              <span class="dv" id="detalhe-icms-frete">R$ 0,00</span>
-            </div>
-            <div class="detalhe-linha indent">
-              <span class="dl">PIS</span>
-              <span class="dv" id="detalhe-pis">R$ 0,00</span>
-            </div>
-            <div class="detalhe-linha indent">
-              <span class="dl">COFINS</span>
-              <span class="dv" id="detalhe-cofins">R$ 0,00</span>
-            </div>
-          </div>
-
-          <div class="resultado-grid">
-            <div class="res-card">
-              <label>Ressarcimento Mercadoria</label>
-              <input type="text" id="res-mercadoria" readonly placeholder="R$ 0,00">
-            </div>
-            <div class="res-card">
-              <label>Ressarcimento Impostos</label>
-              <input type="text" id="res-impostos" readonly placeholder="R$ 0,00">
-            </div>
-            <div class="res-card total">
-              <label>Total à Pagar</label>
-              <input type="text" id="res-total" readonly placeholder="R$ 0,00">
-            </div>
-          </div>
-
-          <div class="botoes-acao">
-            <button class="btn btn-primary" onclick="gerarPDF()">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
-                <polyline points="14 2 14 8 20 8"/>
-                <line x1="12" y1="18" x2="12" y2="12"/>
-                <line x1="9"  y1="15" x2="15" y2="15"/>
-              </svg>
-              Gerar PDF
-            </button>
-          </div>
-
         </div>
+
+        <!-- Ação principal -->
+        <div class="summary-actions">
+          <button type="button" class="btn btn-primary btn-block" id="btn-gerar-pdf" aria-describedby="dica-pdf">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M12 11v6M9 14l3 3 3-3"/></svg>
+            Gerar PDF da nota
+          </button>
+          <p class="field-hint" id="dica-pdf">Abre a nota em nova janela. Na impressão, escolha “Salvar como PDF” ou uma impressora.</p>
+          <p class="form-feedback" id="feedback-pdf" role="alert" hidden></p>
+        </div>
+
+        <!-- Detalhamento -->
+        <div class="summary-details">
+          <h3 class="summary-subtitle">Perda apurada</h3>
+          <dl class="data-list">
+            <div class="data-row"><dt>Peso de saída</dt><dd id="resumo-peso-saida">—</dd></div>
+            <div class="data-row"><dt>Peso de destino</dt><dd id="resumo-peso-destino">—</dd></div>
+            <div class="data-row"><dt>Peso sinistrado</dt><dd id="resumo-peso-sinistrado">—</dd></div>
+            <div class="data-row"><dt>Percentual de perda</dt><dd id="resumo-perda">—</dd></div>
+          </dl>
+
+          <h3 class="summary-subtitle">Bases proporcionais</h3>
+          <dl class="data-list">
+            <div class="data-row"><dt>Mercadoria</dt><dd id="detalhe-base-merc">R$ 0,00</dd></div>
+            <div class="data-row"><dt>Frete</dt><dd id="detalhe-base-frete">R$ 0,00</dd></div>
+          </dl>
+
+          <h3 class="summary-subtitle">Impostos recuperáveis</h3>
+          <dl class="data-list">
+            <div class="data-row"><dt>ICMS sobre a mercadoria</dt><dd id="detalhe-icms-merc">R$ 0,00</dd></div>
+            <div class="data-row"><dt>ICMS sobre o frete</dt><dd id="detalhe-icms-frete">R$ 0,00</dd></div>
+            <div class="data-row"><dt>PIS</dt><dd id="detalhe-pis">R$ 0,00</dd></div>
+            <div class="data-row"><dt>COFINS</dt><dd id="detalhe-cofins">R$ 0,00</dd></div>
+          </dl>
+        </div>
+
+        <!-- Novo cálculo (afastado da ação principal) -->
+        <div class="reset">
+          <button type="button" class="btn btn-secondary btn-block" id="btn-novo-calculo" aria-expanded="false" aria-controls="confirmar-limpeza">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4h4"/></svg>
+            Novo cálculo
+          </button>
+          <div class="confirm" id="confirmar-limpeza" hidden>
+            <p>Apagar todos os campos preenchidos?</p>
+            <div class="confirm-actions">
+              <button type="button" class="btn btn-danger btn-sm" id="btn-confirmar-limpeza">Apagar campos</button>
+              <button type="button" class="btn btn-secondary btn-sm" id="btn-cancelar-limpeza">Cancelar</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </aside>
+
+  </div><!-- /calc-layout -->
+
+  <!-- ═══════════ HISTÓRICO ═══════════ -->
+  <section class="history" id="historico" aria-labelledby="titulo-historico" tabindex="-1">
+    <header class="history-header">
+      <div>
+        <h2 class="history-title" id="titulo-historico">Histórico de notas geradas</h2>
+        <p class="history-desc">Fica salvo só neste navegador, neste computador. Abra uma nota para revisar ou gerar o PDF de novo.</p>
       </div>
-    </section>
-
-    <!-- ═══════════ FAQ ═══════════ -->
-    <section id="faq">
-      <div class="card">
-        <div class="card-header">
-          <span class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"/>
-              <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/>
-              <line x1="12" y1="17" x2="12.01" y2="17"/>
-            </svg>
-          </span>
-          <h2>Perguntas Frequentes</h2>
-        </div>
-        <div class="card-body">
-          <div class="faq-item">
-            <h3>Como funciona o cálculo?</h3>
-            <p>O sistema calcula a proporção da perda em peso, aplica sobre os valores de NF e frete e recupera os impostos embutidos (ICMS, PIS, COFINS) via Gross-Up. Se a UF de origem for MT, o cálculo é feito de forma direta, sem Gross-Up.</p>
-          </div>
-          <div class="faq-item">
-            <h3>O que é Gross-Up?</h3>
-            <p>"Gross-Up" significa embutir os impostos no valor base — calcular "por dentro". O sistema recupera ICMS, PIS e COFINS proporcionalmente à perda. Esse método não se aplica em operações originadas no Mato Grosso.</p>
-          </div>
-          <div class="faq-item">
-            <h3>PIS e COFINS se aplicam a todos os produtos?</h3>
-            <p>Não. Apenas Milho, Algodão e Sorgo têm PIS (1,65%) e COFINS (7,60%) aplicados. Os demais produtos recebem apenas o ICMS.</p>
-          </div>
-          <div class="faq-item">
-            <h3>Posso gerar um PDF da nota?</h3>
-            <p>Sim. Após o cálculo, clique em "Visualizar Nota" para prévia, depois em "Gerar PDF" para salvar, ou "Imprimir" para impressão direta.</p>
-          </div>
-          <div class="faq-item">
-            <h3>Quais campos são obrigatórios?</h3>
-            <p>Para o cálculo funcionar: Peso de Saída, Peso de Destino, Valor NF e UF de Origem + Destino. Os demais campos compõem o documento final.</p>
-          </div>
-        </div>
+      <div class="history-tools" id="historico-ferramentas" hidden>
+        <label class="sr-only" for="historico-busca">Buscar no histórico</label>
+        <input class="input history-search" type="search" id="historico-busca" placeholder="Buscar transportador, produto, NF…" autocomplete="off">
+        <button type="button" class="btn btn-secondary" id="btn-limpar-historico" aria-expanded="false" aria-controls="confirmar-historico">Limpar histórico</button>
       </div>
-    </section>
+    </header>
 
-  </div><!-- /content-wrapper -->
-</div><!-- /container -->
+    <div class="confirm" id="confirmar-historico" hidden>
+      <p>Apagar todas as notas do histórico deste navegador?</p>
+      <div class="confirm-actions">
+        <button type="button" class="btn btn-danger btn-sm" id="btn-confirmar-historico">Apagar histórico</button>
+        <button type="button" class="btn btn-secondary btn-sm" id="btn-cancelar-historico">Cancelar</button>
+      </div>
+    </div>
+
+    <p class="history-empty" id="historico-vazio">Nenhuma nota gerada ainda. Cada nota criada em “Gerar PDF da nota” aparece aqui.</p>
+    <p class="history-empty" id="historico-sem-resultado" hidden>Nenhuma nota encontrada para essa busca.</p>
+    <p class="field-hint" id="historico-aviso" hidden></p>
+
+    <ol class="history-list" id="historico-lista" aria-label="Notas geradas, da mais recente para a mais antiga"></ol>
+  </section>
+
+  <!-- ═══════════ PERGUNTAS FREQUENTES ═══════════ -->
+  <section class="faq" id="faq" aria-labelledby="titulo-faq" tabindex="-1">
+    <h2 class="faq-title" id="titulo-faq">Perguntas frequentes</h2>
+
+    <details class="faq-item">
+      <summary>Como o valor é calculado?</summary>
+      <div class="faq-answer">
+        <p>A perda é medida pelo peso (saída menos destino). Essa proporção é aplicada sobre o valor da NF e do frete, e somam-se os impostos recuperáveis: ICMS, PIS e COFINS. Fora de MT, os impostos são recuperados por gross-up. Com origem em MT, são aplicados diretamente sobre a base proporcional.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>O que é gross-up?</summary>
+      <div class="faq-answer">
+        <p>É o cálculo “por dentro”: a base proporcional é dividida por (100% menos as alíquotas) para reconstituir o valor com impostos, e os impostos são calculados sobre esse valor. Não se aplica a operações com origem em Mato Grosso.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>PIS e COFINS se aplicam a todos os produtos?</summary>
+      <div class="faq-answer">
+        <p>Não. Só milho, algodão e sorgo têm PIS (1,65%) e COFINS (7,60%). Para os demais produtos, apenas o ICMS é recuperado.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Como gero o PDF da nota?</summary>
+      <div class="faq-answer">
+        <p>Com o cálculo concluído, clique em “Gerar PDF da nota”. A nota abre em uma nova janela com a impressão do navegador: escolha “Salvar como PDF” para criar o arquivo ou selecione uma impressora. Se faltar algum campo obrigatório, ele fica destacado com a orientação de correção.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Quais campos são obrigatórios?</summary>
+      <div class="faq-answer">
+        <p>Para o cálculo: produto, UF de origem, UF de destino, peso de saída, peso de destino e valor da NF de saída. O frete é opcional. Os dados da nota (transportador, fornecedor e documentos) não alteram o valor, mas aparecem no PDF.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Posso corrigir um valor depois do cálculo?</summary>
+      <div class="faq-answer">
+        <p>Sim. Altere o campo e o resultado é recalculado na hora, sem perder o restante. Para começar outro sinistro do zero, use “Novo cálculo”.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Onde ficam as notas que já gerei?</summary>
+      <div class="faq-answer">
+        <p>No “Histórico”, no topo da página. Cada nota gerada fica salva neste navegador, neste computador: não vai para nenhum servidor e não aparece em outro computador ou navegador. Use “Abrir” para trazer os dados de volta ao formulário (o valor é recalculado) e gerar o PDF de novo. Limpar os dados de navegação do navegador apaga o histórico.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>O CNPJ com letras é aceito?</summary>
+      <div class="faq-answer">
+        <p>Sim. Desde 31/07/2026 a Receita Federal emite CNPJ alfanumérico, com letras nas 12 primeiras posições. Os campos aceitam os dois formatos e conferem os dígitos verificadores.</p>
+      </div>
+    </details>
+  </section>
+
+</main>
+
+<!-- Barra fixa com o total (telas pequenas) -->
+<div class="total-bar" id="barra-total" hidden>
+  <div class="total-bar-text">
+    <span class="total-bar-label">Total à pagar</span>
+    <strong class="total-bar-value" id="barra-total-valor">R$ 0,00</strong>
+  </div>
+  <a class="btn btn-secondary btn-sm" href="#resultado">Ver resultado</a>
+</div>
+
+<!-- Anúncios para leitores de tela -->
+<p class="sr-only" id="anuncio" aria-live="polite"></p>
 
 <!-- ═══════════════ FOOTER ═══════════════ -->
 <footer class="footer">
-  <div class="footer-content">
-    <div class="footer-brand">
-      <img src="./img/adm-logo.png" alt="ADM">
-    </div>
-    <div class="footer-center">
-      <p>Calculadora de Notas de Débito &mdash; Sinistros em Transporte<br>
-      <span>ADM do Brasil &nbsp;·&nbsp; 2026</span></p>
-    </div>
+  <div class="footer-inner">
+    <img class="footer-logo" src="./img/adm-logo-negativo.png" alt="ADM" width="58" height="44">
+    <p class="footer-text">Calculadora de nota de débito para sinistros no transporte<br><span>ADM do Brasil, 2026</span></p>
     <ul class="footer-links">
-      <li><a href="./paginas/guia_rapido.html" target="_blank">Guia de Uso</a></li>
-      <li><a href="./README.md" target="_blank">Documentação</a></li>
-      <li><a href="./paginas/teste_calculos.html" target="_blank">Testes</a></li>
+      <li><a href="./paginas/guia_rapido.html" target="_blank" rel="noopener">Guia de uso<span class="sr-only"> (abre em nova aba)</span></a></li>
+      <li><a href="./README.md" target="_blank" rel="noopener">Documentação<span class="sr-only"> (abre em nova aba)</span></a></li>
+      <li><a href="./paginas/teste_calculos.html" target="_blank" rel="noopener">Testes<span class="sr-only"> (abre em nova aba)</span></a></li>
     </ul>
   </div>
 </footer>
@@ -428,6 +498,8 @@
 <script src="./js/aliquita.js"></script>
 <script src="./js/script.js"></script>
 <script src="./js/visual.js"></script>
+<script src="./js/ui.js"></script>
+<script src="./js/historico.js"></script>
 
 </body>
 </html>

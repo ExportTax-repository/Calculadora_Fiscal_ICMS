@@ -1,3 +1,12 @@
+// =====================================================
+// SCRIPT.JS — Regras de cálculo da indenização
+// -----------------------------------------------------
+// Contém as fórmulas (peso sinistrado, proporção, gross-up,
+// ICMS, PIS, COFINS e total). Alterações aqui mudam valores
+// financeiros: valide com os cenários de regressão do README.
+// A apresentação (status, resumo, validação) fica em js/ui.js.
+// =====================================================
+
 // Função para formatar dinheiro no padrão brasileiro (R$)
 function formatarMoeda(valor) {
     return valor.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -6,6 +15,36 @@ function formatarMoeda(valor) {
 // Formata peso com pontos de milhar, sem decimais
 function formatarPeso(valor) {
     return Math.round(valor).toLocaleString('pt-BR');
+}
+
+// Formata percentual no padrão brasileiro, com 2 casas (ex.: 1,67%)
+// Mesmo arredondamento de antes (toFixed); só troca o ponto pela vírgula.
+function formatarPercentual(valor) {
+    return valor.toFixed(2).replace('.', ',') + '%';
+}
+
+// Lê a alíquota de ICMS do campo automático.
+// Aceita "19,5" (formato exibido) e "19.5".
+function lerAliquotaIcms() {
+    const campo = document.getElementById('aliquota-icms');
+    const texto = String(campo ? campo.value : '').replace(',', '.');
+    return parseFloat(texto) || 0;
+}
+
+// Produtos com PIS e COFINS recuperáveis (regra existente — alterar só com validação fiscal)
+const PRODUTOS_COM_PIS_COFINS = ['MILHO', 'ALGODAO', 'ALGODÃO', 'SORGO'];
+
+function produtoTemPisCofins(produto) {
+    const produtoUpper = String(produto || '').toUpperCase();
+    return PRODUTOS_COM_PIS_COFINS.some(p => produtoUpper.includes(p));
+}
+
+// Mostra o aviso "PIS e COFINS não se aplicam" assim que o produto é escolhido
+function atualizarAvisoPisCofins() {
+    const aviso = document.getElementById('info-piscofins');
+    const campoProduto = document.getElementById('produto');
+    const produto = campoProduto ? campoProduto.value : '';
+    if (aviso) aviso.style.display = (produto && !produtoTemPisCofins(produto)) ? 'block' : 'none';
 }
 
 // Verifica se é operação em MT (sem gross-up)
@@ -30,7 +69,7 @@ function calcularSinistro() {
     if (pesoDestino > pesoSaida && pesoSaida > 0) {
         if (avisoNegativo) avisoNegativo.style.display = 'block';
         document.getElementById('peso-sinistrado').value = '0';
-        document.getElementById('percentual-perda').value = '0%';
+        document.getElementById('percentual-perda').value = formatarPercentual(0);
         limparResultados();
         return;
     }
@@ -47,7 +86,7 @@ function calcularSinistro() {
     if (pesoSaida > 0) {
         percentualPerda = (pesoSinistrado / pesoSaida) * 100;
     }
-    document.getElementById('percentual-perda').value = percentualPerda.toFixed(2) + '%';
+    document.getElementById('percentual-perda').value = formatarPercentual(percentualPerda);
 
     calcularFinanceiro();
 }
@@ -58,7 +97,10 @@ function calcularFinanceiro() {
     const pesoSaida      = parseFloat(document.getElementById('peso-saida').value.replace(/\./g, '')) || 0;
     const pesoSinistrado = parseFloat(document.getElementById('peso-sinistrado').value.replace(/\./g, '')) || 0;
     const valorFrete     = getNumerico('valor-frete');
-    const aliquotaIcms   = parseFloat(document.getElementById('aliquota-icms').value) || 0;
+    const aliquotaIcms   = lerAliquotaIcms();
+
+    // O aviso de PIS/COFINS depende só do produto: atualiza antes de qualquer retorno
+    atualizarAvisoPisCofins();
 
     if (pesoSaida === 0 || pesoSinistrado === 0) {
         limparResultados();
@@ -67,14 +109,10 @@ function calcularFinanceiro() {
 
     // Determina se PIS/COFINS se aplicam ao produto selecionado
     const produto = (document.getElementById('produto') && document.getElementById('produto').value) ? document.getElementById('produto').value : '';
-    const produtoUpper = produto.toUpperCase();
-    const aplicaPisCofins = ['MILHO','ALGODAO','ALGODÃO','SORGO'].some(p => produtoUpper.includes(p));
+    const aplicaPisCofins = produtoTemPisCofins(produto);
     const aliqPis    = aplicaPisCofins ? 1.65 : 0;
     const aliqCofins = aplicaPisCofins ? 7.60 : 0;
     const operacaoMT = ehOperacaoMT();
-
-    const avisoPisCofins = document.getElementById('info-piscofins');
-    if (avisoPisCofins) avisoPisCofins.style.display = aplicaPisCofins ? 'none' : 'block';
 
     // PASSO 1: Proporção de perda
     const proporcao      = pesoSinistrado / pesoSaida;
@@ -112,7 +150,7 @@ function calcularFinanceiro() {
     document.getElementById('detalhe-pis').textContent        = 'R$ ' + formatarMoeda(pisMerc);
     document.getElementById('detalhe-cofins').textContent     = 'R$ ' + formatarMoeda(cofinsMerc);
 
-    // ── Melhoria 2: campos resultado como texto destacado ──
+    // ── Resumo: mercadoria, impostos e total ──
     setResultado('res-mercadoria', baseMercadoria);
     setResultado('res-impostos',   totalImpostos);
     setResultado('res-total',      totalPagar, true);
@@ -121,27 +159,22 @@ function calcularFinanceiro() {
 
 }
 
-// Atualiza campo de resultado com formatação e destaque
+// Atualiza um valor do resumo. A aparência fica no CSS (css/index.css);
+// o parâmetro "destaque" é mantido por compatibilidade.
 function setResultado(id, valor, destaque) {
     const el = document.getElementById(id);
     if (!el) return;
     el.value = 'R$ ' + formatarMoeda(valor);
-    el.style.fontWeight = 'bold';
-    el.style.fontSize   = destaque ? '1.2rem' : '1rem';
-    el.style.color      = destaque ? '#d9534f' : '#012169';
-    el.style.background = destaque
-        ? 'linear-gradient(135deg, #fff8e1, #fff3cd)'
-        : '#f0f6ff';
-    el.style.border     = destaque ? '2px solid #F6802E' : '1px solid #c8d8f0';
-    el.style.borderRadius = '6px';
-    el.style.padding    = '10px 14px';
+    el.classList.add('tem-valor');
 }
 
 // Limpar todos os resultados
 function limparResultados() {
-    // ── Melhoria 1: peso sinistrado zerado com milhar ──
+    // Sem resultado válido, a nota não pode usar dados de um cálculo anterior
+    window.dadosCalculo = null;
+
     document.getElementById('peso-sinistrado').value = '0';
-    document.getElementById('percentual-perda').value = '0%';
+    document.getElementById('percentual-perda').value = formatarPercentual(0);
     document.getElementById('detalhe-base-merc').textContent  = 'R$ 0,00';
     document.getElementById('detalhe-base-frete').textContent = 'R$ 0,00';
     document.getElementById('detalhe-icms-merc').textContent  = 'R$ 0,00';
@@ -152,7 +185,7 @@ function limparResultados() {
         const el = document.getElementById(id);
         if (el) {
             el.value = 'R$ 0,00';
-            el.style = '';
+            el.classList.remove('tem-valor');
         }
     });
 }

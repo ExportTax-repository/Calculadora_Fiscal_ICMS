@@ -93,14 +93,21 @@ function buscarAliquota() {
         const aliquota = aliquotasICMS[chave];
         
         if (aliquota !== undefined) {
-            document.getElementById('aliquota-icms').value = aliquota;
-            // Chama a função principal do script.js para recalcular tudo 
+            // Exibe no padrão brasileiro (ex.: 19,5). script.js lê vírgula ou ponto.
+            document.getElementById('aliquota-icms').value = String(aliquota).replace('.', ',');
+            // Chama a função principal do script.js para recalcular tudo
             // caso o usuário mude o estado no meio do preenchimento
             if (typeof calcularFinanceiro === "function") {
                 calcularFinanceiro();
             }
         } else {
-            document.getElementById('aliquota-icms').value = ''; 
+            document.getElementById('aliquota-icms').value = '';
+        }
+    } else {
+        // Uma das UFs foi desmarcada: não mantém a alíquota do par anterior
+        document.getElementById('aliquota-icms').value = '';
+        if (typeof calcularFinanceiro === "function") {
+            calcularFinanceiro();
         }
     }
 }

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teste de Cálculos - Nota de Débito</title>
+    <link rel="icon" type="image/png" href="../img/adm-logo.png">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -68,16 +69,16 @@
             font-weight: 700;
         }
         .total-resultado {
-            background: #fcf8e3;
+            background: #F4FAE6;
             padding: 15px;
             border-radius: 4px;
             margin-top: 15px;
-            border: 2px solid #F6802E;
+            border: 2px solid #8BC400;
         }
         .total-resultado p {
             font-size: 18px;
             font-weight: bold;
-            color: #d9534f;
+            color: #012169;
             margin: 5px 0;
         }
         button {
@@ -91,7 +92,7 @@
             margin: 10px 0;
         }
         button:hover {
-            background-color: #007DBA;
+            background-color: #426DA9;
         }
         .erro {
             color: #dc3545;
@@ -114,6 +115,7 @@
 <body>
 
 <div class="teste-container">
+    <img src="../img/adm-logo-color.png" alt="ADM" style="height:56px;width:auto;display:block;margin-bottom:12px;">
     <h1>🧪 Teste de Cálculos - Nota de Débito</h1>
     
     <h2>Exemplo de Teste Real</h2>
@@ -250,7 +252,7 @@ function calcularTeste() {
     html += '<p>ICMS Frete: R$ ' + formatarMoeda(resultado.icmsFrete) + '</p>';
     html += '<p>PIS: R$ ' + formatarMoeda(resultado.pisMerc) + '</p>';
     html += '<p>COFINS: R$ ' + formatarMoeda(resultado.cofinsMerc) + '</p>';
-    html += '<p style="color: #d9534f; font-size: 20px; margin-top: 10px;">💰 Total à Pagar: R$ ' + formatarMoeda(resultado.totalPagar) + '</p>';
+    html += '<p style="color: #012169; font-size: 20px; margin-top: 10px;">💰 Total à Pagar: R$ ' + formatarMoeda(resultado.totalPagar) + '</p>';
     html += '</div></div>';
     
     document.getElementById('resultado1').innerHTML = html;
